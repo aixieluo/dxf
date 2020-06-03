@@ -20,4 +20,12 @@ Route::group(['middleware' => ['api']], function () {
         Route::post('logout', 'AuthController@logout')->name('logout');
         Route::post('refresh', 'AuthController@refresh')->name('refresh');
     });
+    Route::get('/positions', 'AdminController@positions')->name('positions');
+    Route::group(['prefix'=> 'users'], function () {
+        Route::get('/', 'AdminController@users')->name('users');
+        Route::get('/{id}', 'AdminController@user')->name('user');
+        Route::post('/create', 'AdminController@createUser')->name('users.create');
+        Route::post('{id}/update', 'AdminController@updateUser')->name('users.update');
+        Route::post('{id}/delete', 'AdminController@deleteUser')->name('users.delete');
+    });
 });
