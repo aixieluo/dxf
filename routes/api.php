@@ -28,4 +28,35 @@ Route::group(['middleware' => ['api']], function () {
         Route::post('{id}/update', 'AdminController@updateUser')->name('users.update');
         Route::post('{id}/delete', 'AdminController@deleteUser')->name('users.delete');
     });
+    Route::group(['prefix' => 'order'], function () {
+        Route::get('/', 'OrderController@index');
+        Route::get('/{id}', 'OrderController@order');
+        Route::post('/', 'OrderController@create');
+        Route::post('/{id}/update', 'OrderController@update');
+        Route::post('/{id}/delete', 'OrderController@delete');
+        Route::post('/{id}/confirm', 'OrderController@confirm');
+        Route::get('/{id}/design/{d_id}', 'OrderController@orderDesign');
+        Route::post('/{id}/design/{d_id}/update', 'OrderController@updateOrderDesign');
+    });
+    Route::group(['prefix' => 'report'], function () {
+        Route::get('material', 'ReportController@material');
+        Route::get('material/excel', 'ReportController@exportMaterial');
+        Route::get('user', 'ReportController@user');
+        Route::get('user/excel', 'ReportController@exportUser');
+    });
+    Route::group(['prefix' => 'sofa'], function () {
+        Route::get('/', 'SofaController@index');
+        Route::get('/list', 'SofaController@sofas');
+        Route::get('/{id}', 'SofaController@sofa');
+        Route::post('/', 'SofaController@create');
+        Route::post('/{id}', 'SofaController@update');
+        Route::group(['prefix' => '{id}/items'], function () {
+            Route::get('/', 'SofaController@items');
+            Route::get('/{itemId}', 'SofaController@item');
+            Route::post('/', 'SofaController@createItem');
+            Route::post('/{itemId}', 'SofaController@updateItem');
+        });
+    });
+    Route::post('upload', 'UploadController@upload');
+    Route::get('designs', 'SofaController@designs');
 });

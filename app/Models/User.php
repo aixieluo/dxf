@@ -26,6 +26,11 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $nickname
+ * @property int $position_id
+ * @property-read \App\Models\Position $position
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereNickname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePositionId($value)
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -94,5 +99,10 @@ class User extends Authenticatable implements JWTSubject
     public function position()
     {
         return $this->belongsTo(Position::class, 'position_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
     }
 }
