@@ -61,7 +61,7 @@ class Order extends Model
 
     public function designs()
     {
-        return $this->belongsToMany(Design::class, 'order_design', 'order_id', 'design_id');
+        return $this->belongsToMany(Design::class, 'order_design', 'order_id', 'design_id')->withPivot(['lengths', 'count', 'width']);
     }
 
     public function orderDesigns()

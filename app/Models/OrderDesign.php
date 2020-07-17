@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OrderDesign whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read mixed $width
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OrderDesign whereWidth($value)
+ * @property-read \App\Models\Design $design
  */
 class OrderDesign extends Model
 {
@@ -46,12 +48,7 @@ class OrderDesign extends Model
         'lengths' => 'array'
     ];
 
-    public function getWidthAttribute()
-    {
-        return 1;
-    }
-
-    public function designs()
+    public function design()
     {
         return $this->belongsTo(Design::class);
     }

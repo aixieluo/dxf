@@ -37,6 +37,17 @@ class Position extends Model
         self::POSITION_OPERATOR => '运营专员',
     ];
 
+    public static $p1 = [
+        self::POSITION_ADMIN => '超级管理员',
+        self::POSITION_SALE => '业务员',
+    ];
+
+    public static $p2 = [
+        self::POSITION_ADMIN    => '超级管理员',
+        self::POSITION_SALE     => '业务员',
+        self::POSITION_OPERATOR => '运营专员',
+    ];
+
     protected $fillable = [
         'name',
     ];

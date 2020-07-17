@@ -19,7 +19,7 @@ class CreateOrderDesignTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedInteger('count')->comment('件数');
             $table->text('lengths')->comment('边长集合');
-            $table->unsignedInteger('width')->nullable()->comment('耗材宽度');
+            $table->unsignedInteger('width')->comment('耗材宽度');
             $table->timestamps();
         });
     }

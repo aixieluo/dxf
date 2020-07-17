@@ -31,6 +31,9 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property-read \App\Models\Position $position
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereNickname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePositionId($value)
+ * @property-read mixed $roles
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
+ * @property-read int|null $orders_count
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -77,6 +80,10 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
     ];
 
+    protected $appends = [
+        'roles',
+    ];
+
     /**
      * @return mixed
      */
@@ -91,6 +98,11 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function getRolesAttribute()
+    {
+        return [$this->position->name];
     }
 
     /**

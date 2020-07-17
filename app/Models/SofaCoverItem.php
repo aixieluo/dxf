@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SofaCoverItem whereUid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SofaCoverItem whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
+ * @property-read int|null $orders_count
  */
 class SofaCoverItem extends Model
 {

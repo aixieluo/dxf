@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property array $types 边长类型集合
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Design whereTypes($value)
+ * @property string $model 实例模型
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Design whereModel($value)
  */
 class Design extends Model
 {

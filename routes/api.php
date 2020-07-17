@@ -35,6 +35,7 @@ Route::group(['middleware' => ['api']], function () {
         Route::post('/{id}/update', 'OrderController@update');
         Route::post('/{id}/delete', 'OrderController@delete');
         Route::post('/{id}/confirm', 'OrderController@confirm');
+        Route::get('/{id}/drawing/download', 'OrderController@downloadDrawing');
         Route::get('/{id}/design/{d_id}', 'OrderController@orderDesign');
         Route::post('/{id}/design/{d_id}/update', 'OrderController@updateOrderDesign');
     });

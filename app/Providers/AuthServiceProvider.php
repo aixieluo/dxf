@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Order;
+use App\Models\Position;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -25,5 +28,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         //
+        Gate::define('order.curd', function (User $user, Order $order) {
+            return $user->id === $order->user_id ||
+                   in_array($user->position->name, Position::$p2);
+        });
     }
 }

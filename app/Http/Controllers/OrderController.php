@@ -63,6 +63,9 @@ class OrderController extends Controller
     public function update($id, CreateRequest $request)
     {
         $order = $this->order->id($id);
+        if (\Gate::denies('order.curd', $order)) {
+            throw new \Exception('权限不足', 403);
+        }
         $this->order->update($order, $request->all());
         return Response::json();
     }
@@ -70,6 +73,9 @@ class OrderController extends Controller
     public function delete($id)
     {
         $order = $this->order->id($id);
+        if (\Gate::denies('order.curd', $order)) {
+            throw new \Exception('权限不足', 403);
+        }
         $this->order->delete($order);
         return Response::json();
     }
@@ -90,6 +96,14 @@ class OrderController extends Controller
     public function updateOrderDesign($order_id, $design_id, DesignRequest $request)
     {
         $this->order->updateOrderDesign($order_id, $design_id, $request->all());
-        return Response::json();
+        $data = $this->order->getOrderDesign($order_id, $design_id);
+        return Response::json($data);
+    }
+
+    public function downloadDrawing($id)
+    {
+        $order = $this->order->id($id);
+        $file = $this->order->getDrawing($order);
+        return Response::download($file);
     }
 }
