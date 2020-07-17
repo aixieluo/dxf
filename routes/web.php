@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('test', function () {
-    return view('index2');
+Route::get('/', function () {
+    return view('index');
 });

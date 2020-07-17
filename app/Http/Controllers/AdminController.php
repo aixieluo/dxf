@@ -23,6 +23,11 @@ class AdminController extends Controller
      */
     public function __construct(UserRepository $user_repository)
     {
+        /** @var User $user */
+        $user = auth()->user();
+        if ($user->position->name !== Position::POSITION_ADMIN) {
+            throw new \Exception('没有权限', 403);
+        }
         $this->user_repository = $user_repository;
     }
 

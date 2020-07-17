@@ -20,6 +20,7 @@ class UserRepository extends Repository
     public function store(array $attributes)
     {
         $u = app(User::class);
+        $attributes['password'] = bcrypt($attributes['password']);
         $u->fill($attributes);
         $u->position()->associate(Arr::get($attributes, 'position_id'));
         $u->save();
@@ -28,6 +29,9 @@ class UserRepository extends Repository
 
     public function update(User $user, array $attributes)
     {
+        if (isset($attributes['password'])) {
+            $attributes['password'] = bcrypt($attributes['password']);
+        }
         return $user->fill($attributes)->save();
     }
 
