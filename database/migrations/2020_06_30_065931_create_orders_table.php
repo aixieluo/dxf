@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('sofa_cover_id');
             $table->unsignedBigInteger('sofa_cover_item_id');
             $table->unsignedBigInteger('user_id');
-            $table->text('note')->comment('备注');
+            $table->text('note')->nullable()->comment('备注');
             $table->unsignedDecimal('total')->nullable()->comment('订单金额');
             $table->unsignedInteger('count')->nullable()->comment('数量');
             $table->string('dir')->nullable()->comment('载片文件');
@@ -29,6 +29,7 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
             $table->unique('oid');
         });
+        DB::update("ALTER TABLE orders AUTO_INCREMENT = 100000");
     }
 
     /**

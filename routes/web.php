@@ -11,6 +11,13 @@
 |
 */
 
+use App\Models\Order;
+
 Route::get('/', function () {
     return view('index');
+});
+
+Route::get('order/{id}/print', function ($id) {
+    $order = Order::find($id);
+    return view('print', compact('order'));
 });

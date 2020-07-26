@@ -19,6 +19,8 @@ class CreateDesignsTable extends Migration
             $table->string('img')->comment('预览图');
             $table->text('types')->comment('边长类型集合');
             $table->string('model')->comment('实例模型');
+            $table->string('accessories')->nullable()->comment('辅料名称');
+            $table->unsignedInteger('accessories_count')->nullable()->comment('辅料个数');
             $table->timestamps();
         });
     }

@@ -12,6 +12,8 @@ use DB;
 use DXFighter\DXFighter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use ZipStream\Option\Archive;
+use ZipStream\ZipStream;
 
 class OrderRepository extends Repository
 {
@@ -27,7 +29,7 @@ class OrderRepository extends Repository
         $order->sofaItem()->associate(Arr::get($all, 'sofa_cover_item_id'));
         $order->user()->associate(auth()->user());
         $order->fill($all)->save();
-        return true;
+        return $order->fresh();
     }
 
     public function update(Order $order, array $all)
@@ -43,7 +45,7 @@ class OrderRepository extends Repository
 
     public function getOrderDesign($order_id, $design_id)
     {
-        return OrderDesign::where(compact('order_id', 'design_id'))->first();
+        return OrderDesign::with(['design'])->where(compact('order_id', 'design_id'))->first();
     }
 
     public function updateOrderDesign($order_id, $design_id, array $all)
@@ -66,7 +68,9 @@ class OrderRepository extends Repository
             throw new \Exception('现在定制规格个数为0，请先定制规格', 400);
         }
         $count = $order->orderDesigns()->count('count');
-        $total = $order->sofaItem->price * $order->orderDesigns->sum('width') / 100;
+        $total = $order->sofaItem->price * $order->orderDesigns->sum(function (OrderDesign $od) {
+                return $od->width * $od->count;
+            }) / 100;
         $order->fill(compact('count', 'total'));
         $dir = $this->draw($order);
         $order->fill(compact('dir'));
@@ -117,9 +121,11 @@ class OrderRepository extends Repository
             $model = $od->design->model;
             /** @var \App\Designs\Design $m */
             $m = new $model($lengths);
-            $p = $m->make($x);
-            $x += $od->width;
-            $d->addEntity($p);
+            for ($i = 0; $i < $od->count; $i++) {
+                $p = $m->make($x);
+                $x += $od->width;
+                $d->addEntity($p);
+            }
         });
         $path = $this->getDir($order);
         $d->saveAs(storage_path($path));
@@ -138,5 +144,21 @@ class OrderRepository extends Repository
             $this->draw($order);
         }
         return $path;
+    }
+
+    public function canDownloadOrder($id)
+    {
+        return Order::whereNotNull('confirmed_at')->find($id);
+    }
+
+    public function downloadZip(\Illuminate\Support\Collection $files)
+    {
+        $options = new Archive();
+        $options->setSendHttpHeaders(true);
+        $zip = new ZipStream(now()->toDateString() . '.zip', $options);
+        $files->map(function ($file) use (&$zip) {
+            $zip->addFileFromPath(last(explode('/', $file)), $file);
+        });
+        $zip->finish();
     }
 }

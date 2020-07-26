@@ -34,10 +34,15 @@ class OrderController extends Controller
             'list' => Order::with([
                 'user',
                 'sofa',
-            ])->when($request->input('start'), function (Builder $builder) use ($request) {
+            ])->withCount(['designs'])->when($request->input('start'), function (Builder $builder) use ($request) {
                 return $builder->whereDate('created_at', '>=', $request->input('start'))->whereDate('created_at', '<=', $request->input('end'));
             })->when($request->input('sofa_id'), function (Builder $builder) use ($request) {
                 return $builder->where('sofa_cover_id', $request->input('sofa_id'));
+            })->when($request->input('name'), function (Builder $builder) use ($request) {
+                $name = $request->input('name');
+                return $builder->whereHas('user', function (Builder $builder) use ($name) {
+                    $builder->where('name', 'like', "%{$name}%");
+                })->orWhere('oid', 'like', "%{$name}%");
             })->paginate($request->input('perPage')),
             'sofas' => SofaCover::all(['id', 'name'])->pluck('name', 'id')
         ]);
@@ -56,8 +61,8 @@ class OrderController extends Controller
 
     public function create(CreateRequest $request)
     {
-        $this->order->create($request->all());
-        return Response::json();
+        $order = $this->order->create($request->all());
+        return Response::json($order);
     }
 
     public function update($id, CreateRequest $request)
@@ -93,6 +98,16 @@ class OrderController extends Controller
         return Response::json($data);
     }
 
+    public function delOrderDesign($order_id, $design_id)
+    {
+        $data = $this->order->getOrderDesign($order_id, $design_id);
+        if ($data->order->confirmed_at) {
+            throw new \Exception('已经确定的订单不允许修改');
+        }
+        $data->delete();
+        return Response::json();
+    }
+
     public function updateOrderDesign($order_id, $design_id, DesignRequest $request)
     {
         $this->order->updateOrderDesign($order_id, $design_id, $request->all());
@@ -105,5 +120,25 @@ class OrderController extends Controller
         $order = $this->order->id($id);
         $file = $this->order->getDrawing($order);
         return Response::download($file);
+    }
+
+    public function downloadDrawingZip(Request $request)
+    {
+        $ids = $request->input('ids');
+        if (! count($ids)) {
+            throw new \Exception('必须选择要下载的订单');
+        }
+        $files = collect($ids)->map(function ($id) {
+            $order = $this->order->canDownloadOrder($id);
+            if (is_null($order)) {
+                return false;
+            }
+            $file = $this->order->getDrawing($order);
+            return $file;
+        })->filter();
+        if ($files->count() < 1) {
+            throw new \Exception('没有符合下载要求的绘图');
+        }
+        return $this->order->downloadZip($files);
     }
 }

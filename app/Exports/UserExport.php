@@ -41,6 +41,7 @@ class UserExport implements FromCollection, Responsable, WithHeadings
     public function __construct(Request $request)
     {
         $this->request = $request;
+        $this->fileName = now()->toDateString() . '.xlsx';
     }
 
     public function headings() : array

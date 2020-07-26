@@ -20,40 +20,52 @@ class DesignSeeder extends Seeder
     {
         $c = collect([
             [
-                'name' => '正L型沙发笠',
-                'img'  => '/design/80F031F593B4C67AAACC5DF41514913E.jpg',
-                'types' => ['l', 'w', 'd', 'c', 'h'],
-                'model' => D1::class
+                'name'              => '右沙发套',
+                'img'               => '/template/正L.jpg',
+                'types'             => ['l', 'w', 'd', 'c', 'h'],
+                'model'             => D1::class,
+                'accessories'       => '绳子*6米',
+                'accessories_count' => 1
             ],
             [
-                'name'  => '反L型沙发笠',
-                'img'   => '/design/80F031F593B4C67AAACC5DF41514913E.jpg',
-                'types' => ['l', 'w', 'd', 'c', 'h'],
-                'model' => D2::class,
+                'name'              => '左沙发套',
+                'img'               => '/template/反L.jpg',
+                'types'             => ['l', 'w', 'd', 'c', 'h'],
+                'model'             => D2::class,
+                'accessories'       => '绳子*6米',
+                'accessories_count' => 1
             ],
             [
-                'name'  => '头枕斤/一片式/扶手巾',
-                'img'   => '/design/80F031F593B4C67AAACC5DF41514913E.jpg',
-                'types' => ['w', 'h', 'l'],
-                'model' => D3::class,
+                'name'              => '头枕斤/一片式/扶手巾',
+                'img'               => '/template/头枕巾 一片式 扶手巾.jpg',
+                'types'             => ['w', 'h', 'l'],
+                'model'             => D3::class,
+                'accessories'       => '绳子*4米',
+                'accessories_count' => 1
             ],
             [
-                'name'  => '坐垫/靠背',
-                'img'   => '/design/80F031F593B4C67AAACC5DF41514913E.jpg',
-                'types' => ['w', 'h', 'l'],
-                'model' => D4::class,
+                'name'              => '方形沙发套/靠背',
+                'img'               => '/template/坐垫 靠背.jpg',
+                'types'             => ['w', 'h', 'l'],
+                'model'             => D4::class,
+                'accessories'       => '绳子*6米',
+                'accessories_count' => 1
             ],
             [
-                'name'  => '靠垫',
-                'img'   => '/design/80F031F593B4C67AAACC5DF41514913E.jpg',
-                'types' => ['w', 'l', 'a', 'b'],
-                'model' => D5::class,
+                'name'              => '靠垫',
+                'img'               => '/template/靠垫.jpg',
+                'types'             => ['w', 'l', 'a', 'b'],
+                'model'             => D5::class,
+                'accessories'       => '绳子*6米',
+                'accessories_count' => 1
             ],
             [
-                'name'  => '抱枕',
-                'img'   => '/design/80F031F593B4C67AAACC5DF41514913E.jpg',
-                'types' => ['w', 'l', 'h'],
-                'model' => D6::class,
+                'name'              => '抱枕',
+                'img'               => '/template/抱枕.jpg',
+                'types'             => ['w', 'l', 'h'],
+                'model'             => D6::class,
+                'accessories'       => '绳子*4米',
+                'accessories_count' => 1
             ],
         ]);
         DB::table('designs')->truncate();

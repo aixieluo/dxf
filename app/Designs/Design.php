@@ -29,14 +29,23 @@ abstract class Design
     public function make($x)
     {
         $points = $this->getPoints();
+        $points = $this->move($points, $x);
         $p = new Polyline();
         foreach ($points as $point) {
-            $p->addPoint($point)->move([$x, 0]);
+            $p->addPoint($point);
         }
         return $p;
     }
 
     abstract protected function getPoints();
+
+    public function move($points, $x)
+    {
+        return collect($points)->map(function ($p) use ($x) {
+            $p[0] += $x;
+            return $p;
+        })->toArray();
+    }
 
     public function getWidth()
     {

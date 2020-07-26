@@ -105,6 +105,11 @@ class User extends Authenticatable implements JWTSubject
         return [$this->position->name];
     }
 
+    public function isRole($role)
+    {
+        return $this->position->name === $role;
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

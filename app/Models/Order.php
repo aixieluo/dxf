@@ -59,6 +59,15 @@ class Order extends Model
         'exported_at',
     ];
 
+    protected $appends = [
+        'print',
+    ];
+
+    public function getPrintAttribute()
+    {
+        return env('APP_URL') . "/order/{$this->id}/print";
+    }
+
     public function designs()
     {
         return $this->belongsToMany(Design::class, 'order_design', 'order_id', 'design_id')->withPivot(['lengths', 'count', 'width']);

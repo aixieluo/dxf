@@ -35,12 +35,23 @@ class Design extends Model
     protected $fillable = [
         'name',
         'img',
-        'types'
+        'types',
+        'accessories',
+        'accessories_count',
     ];
 
     protected $casts = [
         'types' => 'array',
     ];
+
+    protected $appends = [
+        'url',
+    ];
+
+    public function getUrlAttribute()
+    {
+        return env('APP_URL') . $this->img;
+    }
 
     public function sofas()
     {

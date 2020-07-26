@@ -39,7 +39,10 @@ class AdminController extends Controller
     public function users(Request $request)
     {
         return Response::json([
-            'list' => User::with(['position'])->paginate($request->input('perPage'))
+            'list' => User::with(['position'])->paginate($request->input('perPage')),
+            'meta' => [
+                'canDel' => auth()->user()->isRole(Position::POSITION_ADMIN)
+            ]
         ]);
     }
 
@@ -65,6 +68,12 @@ class AdminController extends Controller
     public function deleteUser($id, Request $request)
     {
         $u = $this->user_repository->user($id);
+        if (auth()->id() == $id) {
+            throw new \Exception('自己不可以删除自己');
+        }
+        if (!auth()->user()->isRole(Position::POSITION_ADMIN)) {
+            throw new \Exception('没有删除的权限');
+        }
         $this->user_repository->delete($u);
         return Response::json();
     }
