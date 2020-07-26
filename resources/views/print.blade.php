@@ -33,7 +33,7 @@
                     <div class="title is-5">布料：</div>
                     <div class="is-flex is-justify-center">
                         <figure class="image is-32x32">
-                            <img src="https://bulma.io/images/placeholders/128x128.png">
+                            <img src="{{ env('APP_URL').$order->sofaItem->preview }}">
                         </figure>
                         <div style="margin-left: 20px" class="title is-6">{{ $order->sofaItem->name }}</div>
                     </div>

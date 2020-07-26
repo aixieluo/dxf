@@ -34,7 +34,7 @@ class OrderController extends Controller
             'list' => Order::with([
                 'user',
                 'sofa',
-            ])->withCount(['designs'])->when($request->input('start'), function (Builder $builder) use ($request) {
+            ])->has('user')->withCount(['designs'])->when($request->input('start'), function (Builder $builder) use ($request) {
                 return $builder->whereDate('created_at', '>=', $request->input('start'))->whereDate('created_at', '<=', $request->input('end'));
             })->when($request->input('sofa_id'), function (Builder $builder) use ($request) {
                 return $builder->where('sofa_cover_id', $request->input('sofa_id'));
