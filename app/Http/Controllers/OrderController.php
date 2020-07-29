@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Order\CreateRequest;
 use App\Http\Requests\Order\DesignRequest;
+use App\Models\Design;
 use App\Models\Order;
+use App\Models\OrderDesign;
 use App\Models\SofaCover;
 use App\Repositories\OrderRepository;
 use Illuminate\Database\Eloquent\Builder;
@@ -56,6 +58,7 @@ class OrderController extends Controller
             'sofa.designs',
             'sofaItem',
         ]);
+        $order = $this->order->ods($order);
         return Response::json($order);
     }
 
@@ -105,13 +108,16 @@ class OrderController extends Controller
             throw new \Exception('已经确定的订单不允许修改');
         }
         $data->delete();
-        return Response::json();
+        $order = $this->order->ods($this->order->id($order_id));
+        return Response::json($order->ods);
     }
 
     public function updateOrderDesign($order_id, $design_id, DesignRequest $request)
     {
         $this->order->updateOrderDesign($order_id, $design_id, $request->all());
         $data = $this->order->getOrderDesign($order_id, $design_id);
+        $order = $this->order->ods($this->order->id($order_id));
+        $data->setRelation('ods', $order->ods);
         return Response::json($data);
     }
 

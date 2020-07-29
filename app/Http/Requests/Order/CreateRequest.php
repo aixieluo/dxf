@@ -24,7 +24,7 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'oid' => 'required',
         ];
     }
 }

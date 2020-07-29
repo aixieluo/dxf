@@ -24,6 +24,13 @@ class OrderRepository extends Repository
 
     public function create(array $all)
     {
+        $oid = $all['oid'];
+        if (! is_numeric($oid)) {
+            throw new \Exception('淘宝订单号必须为数字');
+        }
+        if (Order::where(compact('oid'))->first()) {
+            throw new \Exception('该淘宝订单号已存在');
+        }
         $order = new Order();
         $order->sofa()->associate(Arr::get($all, 'sofa_cover_id'));
         $order->sofaItem()->associate(Arr::get($all, 'sofa_cover_item_id'));
@@ -160,5 +167,16 @@ class OrderRepository extends Repository
             $zip->addFileFromPath(last(explode('/', $file)), $file);
         });
         $zip->finish();
+    }
+
+    public function ods(Order $order)
+    {
+        $order->setRelation('ods', $order->orderDesigns->keyBy('design_id')->map(function (OrderDesign $od) {
+            return '('.collect($od->lengths)->map(function ($v, $k) {
+                    return "{$k}:{$v}";
+                })->implode(';'). ";{$od->count}个)";
+        }));
+        $order->unsetRelation('orderDesigns');
+        return $order;
     }
 }
