@@ -172,9 +172,12 @@ class OrderRepository extends Repository
     public function ods(Order $order)
     {
         $order->setRelation('ods', $order->orderDesigns->keyBy('design_id')->map(function (OrderDesign $od) {
-            return '('.collect($od->lengths)->map(function ($v, $k) {
-                    return "{$k}:{$v}";
-                })->implode(';'). ";{$od->count}个)";
+            return [
+                'name' => $od->design->name,
+                'info' => collect($od->lengths)->map(function ($v, $k) {
+                        return "{$k}:{$v}";
+                    })->implode(';'). ";{$od->count}个"
+            ];
         }));
         $order->unsetRelation('orderDesigns');
         return $order;
