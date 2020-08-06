@@ -4,6 +4,16 @@ namespace App\Designs;
 
 class D5 extends Design
 {
+    public function getWidth()
+    {
+        try {
+            $l = collect($this->lengths);
+            return $l->only(['l', 'w', 'd', 'c'])->max() + $l->get('h') * 2 + 30;
+        } catch (\Exception $exception) {
+            throw new \Exception('参数不正确');
+        }
+    }
+
     protected function getPoints()
     {
         try {

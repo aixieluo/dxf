@@ -77,7 +77,7 @@ class OrderRepository extends Repository
         $count = $order->orderDesigns()->count('count');
         $total = $order->sofaItem->price * $order->orderDesigns->sum(function (OrderDesign $od) {
                 return $od->width * $od->count;
-            }) / 100;
+            });
         $order->fill(compact('count', 'total'));
         $dir = $this->draw($order);
         $order->fill(compact('dir'));

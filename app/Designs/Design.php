@@ -47,21 +47,5 @@ abstract class Design
         })->toArray();
     }
 
-    public function getWidth()
-    {
-        $points = $this->getPoints();
-        $max = 0;
-        $min = 0;
-        foreach ($points as $point) {
-            /** @var array $point */
-            $x = $point[0];
-            if ($x > $max) {
-                $max = $x;
-            }
-            if ($x < $min) {
-                $min = $x;
-            }
-        }
-        return $max - $min;
-    }
+    abstract public function getWidth();
 }
