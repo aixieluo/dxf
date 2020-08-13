@@ -48,12 +48,24 @@ class SofaCoverItem extends Model
     ];
 
     protected $appends = [
-        'chain_name'
+        'chain_name',
+        'url',
+        'del',
     ];
+
+    public function getDelAttribute()
+    {
+        return \Gate::allows('admin') && $this->orders->count() === 0;
+    }
 
     public function getChainNameAttribute()
     {
         return "{$this->name}-{$this->uid} {$this->color}-{$this->fid}";
+    }
+
+    public function getUrlAttribute()
+    {
+        return env('APP_URL') . $this->preview;
     }
 
     public function sofa()

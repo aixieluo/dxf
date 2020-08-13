@@ -32,5 +32,9 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id === $order->user_id ||
                    in_array($user->position->name, Position::$p2);
         });
+
+        Gate::define('admin', function (User $user) {
+            return $user->position->name === Position::POSITION_ADMIN;
+        });
     }
 }

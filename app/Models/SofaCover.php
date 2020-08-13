@@ -34,12 +34,18 @@ class SofaCover extends Model
     ];
 
     protected $appends = [
-        'templates'
+        'templates',
+        'del',
     ];
 
     public function getTemplatesAttribute()
     {
         return optional($this->designs)->pluck('id');
+    }
+
+    public function getDelAttribute()
+    {
+        return \Gate::allows('admin') && $this->orders->count() === 0;
     }
 
     public function items()
