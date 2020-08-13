@@ -98,27 +98,27 @@ class OrderController extends Controller
     public function orderDesign($order_id, $design_id)
     {
         $data = $this->order->getOrderDesign($order_id, $design_id);
-        return Response::json($data);
+        $meta['ods'] = $this->order->ods($this->order->id($order_id))->ods;
+        return Response::json(compact('data', 'meta'));
     }
 
-    public function delOrderDesign($order_id, $design_id)
+    public function delOrderDesign($order_id, $design_id, $od_id)
     {
-        $data = $this->order->getOrderDesign($order_id, $design_id);
+        $data = $this->order->getOd($order_id, $design_id, $od_id);
         if ($data->order->confirmed_at) {
             throw new \Exception('已经确定的订单不允许修改');
         }
         $data->delete();
         $order = $this->order->ods($this->order->id($order_id));
+        $this->order->freshTotal($order);
         return Response::json($order->ods);
     }
 
     public function updateOrderDesign($order_id, $design_id, DesignRequest $request)
     {
         $this->order->updateOrderDesign($order_id, $design_id, $request->all());
-        $data = $this->order->getOrderDesign($order_id, $design_id);
-        $order = $this->order->ods($this->order->id($order_id));
-        $data->setRelation('ods', $order->ods);
-        return Response::json($data);
+        $this->order->freshTotal($this->order->id($order_id));
+        return Response::json();
     }
 
     public function downloadDrawing($id)

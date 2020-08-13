@@ -35,13 +35,9 @@ class OrderDesign extends Model
 {
     protected $table = 'order_design';
     protected $fillable = [
-        'oid',
-        'recipient_information',
-        'note',
-        'total',
-        'count',
-        'dir',
-        'exported_at',
+        'width',
+        'lengths',
+        'count'
     ];
 
     protected $casts = [

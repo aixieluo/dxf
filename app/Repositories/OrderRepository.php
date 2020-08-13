@@ -52,21 +52,26 @@ class OrderRepository extends Repository
 
     public function getOrderDesign($order_id, $design_id)
     {
-        return OrderDesign::with(['design'])->where(compact('order_id', 'design_id'))->first();
+        return OrderDesign::with(['design'])->where(compact('order_id', 'design_id'))->get();
+    }
+
+    public function getOd($order_id, $design_id, $od_id)
+    {
+        return OrderDesign::with(['design'])->where(compact('order_id', 'design_id'))->findOrFail($od_id);
     }
 
     public function updateOrderDesign($order_id, $design_id, array $all)
     {
+        /** @var OrderDesign $od */
+        $od = OrderDesign::where(compact('order_id', 'design_id'))->findOrNew(Arr::get($all, 'od_id'));
         $order = $this->id($order_id);
         $design = $this->design($design_id);
-        DB::beginTransaction();
-        $order->designs()->detach($design_id);
+        $od->order()->associate($order_id);
+        $od->design()->associate($design_id);
         $all = Arr::only($all, ['lengths', 'count']);
         $all['width'] = $this->getDesignWidth($design, $all['lengths']);
-        $all['lengths'] = json_encode((array)$all['lengths']);
-        $order->designs()->syncWithoutDetaching([$design_id => $all]);
-        DB::commit();
-        return true;
+        $od->fill($all)->save();
+        return $od;
     }
 
     public function confirm(Order $order)
@@ -74,14 +79,20 @@ class OrderRepository extends Repository
         if ($order->orderDesigns->count() < 1) {
             throw new \Exception('现在定制规格个数为0，请先定制规格', 400);
         }
+        $this->freshTotal($order);
+        $dir = $this->draw($order);
+        $order->fill(compact('dir'));
+        $order->fillable(['confirmed_at'])->fill(['confirmed_at' => now()])->save();
+    }
+
+    public function freshTotal(Order $order)
+    {
         $count = $order->orderDesigns()->count('count');
         $total = $order->sofaItem->price * $order->orderDesigns->sum(function (OrderDesign $od) {
                 return $od->width * $od->count;
             });
-        $order->fill(compact('count', 'total'));
-        $dir = $this->draw($order);
-        $order->fill(compact('dir'));
-        $order->fillable(['confirmed_at'])->fill(['confirmed_at' => now()])->save();
+        $order->fill(compact('count', 'total'))->save();
+        return $order;
     }
 
     public function materialReport(Request $request)
@@ -171,7 +182,7 @@ class OrderRepository extends Repository
 
     public function ods(Order $order)
     {
-        $order->setRelation('ods', $order->orderDesigns->keyBy('design_id')->map(function (OrderDesign $od) {
+        $order->setRelation('ods', $order->orderDesigns->map(function (OrderDesign $od) {
             return [
                 'name' => $od->design->name,
                 'info' => collect($od->lengths)->map(function ($v, $k) {
