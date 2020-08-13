@@ -22,7 +22,7 @@ class DesignSeeder extends Seeder
             [
                 'name'              => '右沙发套',
                 'img'               => '/template/正L.jpg',
-                'types'             => ['l', 'w', 'd', 'c', 'h'],
+                'types'             => ['l', 'w', 'c', 'd', 'h'],
                 'model'             => D1::class,
                 'accessories'       => '绳子*6米',
                 'accessories_count' => 1
@@ -30,7 +30,7 @@ class DesignSeeder extends Seeder
             [
                 'name'              => '左沙发套',
                 'img'               => '/template/反L.jpg',
-                'types'             => ['l', 'w', 'd', 'c', 'h'],
+                'types'             => ['l', 'w', 'c', 'd', 'h'],
                 'model'             => D2::class,
                 'accessories'       => '绳子*6米',
                 'accessories_count' => 1
@@ -38,7 +38,7 @@ class DesignSeeder extends Seeder
             [
                 'name'              => '头枕斤/一片式/扶手巾',
                 'img'               => '/template/头枕巾 一片式 扶手巾.jpg',
-                'types'             => ['w', 'h', 'l'],
+                'types'             => ['l', 'w'],
                 'model'             => D3::class,
                 'accessories'       => '绳子*4米',
                 'accessories_count' => 1
@@ -46,7 +46,7 @@ class DesignSeeder extends Seeder
             [
                 'name'              => '方形沙发套/靠背',
                 'img'               => '/template/坐垫 靠背.jpg',
-                'types'             => ['w', 'h', 'l'],
+                'types'             => ['l', 'w', 'h'],
                 'model'             => D4::class,
                 'accessories'       => '绳子*6米',
                 'accessories_count' => 1
@@ -54,7 +54,7 @@ class DesignSeeder extends Seeder
             [
                 'name'              => '靠垫',
                 'img'               => '/template/靠垫.jpg',
-                'types'             => ['w', 'l', 'a', 'b'],
+                'types'             => ['l', 'w', 'a', 'b'],
                 'model'             => D5::class,
                 'accessories'       => '绳子*6米',
                 'accessories_count' => 1
@@ -62,7 +62,7 @@ class DesignSeeder extends Seeder
             [
                 'name'              => '抱枕',
                 'img'               => '/template/抱枕.jpg',
-                'types'             => ['w', 'l', 'h'],
+                'types'             => ['l', 'w'],
                 'model'             => D6::class,
                 'accessories'       => '绳子*4米',
                 'accessories_count' => 1
