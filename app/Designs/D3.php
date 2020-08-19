@@ -18,7 +18,7 @@ class D3 extends Design
     {
         try {
             $w = $this->lengths['w'];
-            $h = $this->lengths['h'];
+            $h = array_get($this->lengths, 'h');
             $l = $this->lengths['l'];
         } catch (\Exception $exception) {
             throw new \Exception('参数不正确，无法生成');
