@@ -131,7 +131,6 @@ class OrderController extends Controller
     public function downloadDrawingZip(Request $request)
     {
         $ids = $request->input('ids');
-        dd($request->all());
         if (! count($ids)) {
             throw new \Exception('必须选择要下载的订单');
         }
