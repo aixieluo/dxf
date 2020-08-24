@@ -8,7 +8,7 @@ class D5 extends Design
     {
         try {
             $l = collect($this->lengths);
-            return $l->only(['l', 'w', 'd', 'c'])->max() + $l->get('h') * 2 + 30;
+            return $l->only(['l', 'w', 'a', 'b'])->max() + $l->get('b') * 2 + 30;
         } catch (\Exception $exception) {
             throw new \Exception('参数不正确');
         }
