@@ -45,7 +45,7 @@ class OrderController extends Controller
                 return $builder->whereHas('user', function (Builder $builder) use ($name) {
                     $builder->where('name', 'like', "%{$name}%");
                 })->orWhere('oid', 'like', "%{$name}%");
-            })->paginate($request->input('perPage')),
+            })->orderByDesc('updated_at')->paginate($request->input('perPage')),
             'sofas' => SofaCover::all(['id', 'name'])->pluck('name', 'id')
         ]);
     }
