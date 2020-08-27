@@ -37,7 +37,7 @@ class SofaController extends Controller
                 'items',
                 'designs',
                 'orders',
-            ])->paginate($request->input('perPage')),
+            ])->orderBy('order', 'desc')->paginate($request->input('perPage')),
         ]);
     }
 
@@ -63,6 +63,13 @@ class SofaController extends Controller
     {
         $sofa = $this->sofa->id($id);
         $this->sofa->updateSofa($sofa, $request->all());
+        return Response::json();
+    }
+
+    public function up($id, Request $request)
+    {
+        $sofa = $this->sofa->id($id);
+        $this->sofa->upSofa($sofa);
         return Response::json();
     }
 

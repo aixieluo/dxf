@@ -65,4 +65,14 @@ class SofaRepository extends Repository
     {
         return $item->fill($all)->save();
     }
+
+    public function upSofa(SofaCover $sofa)
+    {
+        return $sofa->fillable(['order'])->fill(['order' => $this->orderMax() + 1])->save();
+    }
+
+    public function orderMax()
+    {
+        return SofaCover::max('order');
+    }
 }

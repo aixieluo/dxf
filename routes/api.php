@@ -53,6 +53,7 @@ Route::group(['middleware' => ['api']], function () {
         Route::get('/{id}', 'SofaController@sofa');
         Route::post('/', 'SofaController@create');
         Route::post('/{id}', 'SofaController@update');
+        Route::post('/{id}/up', 'SofaController@up');
         Route::post('/{id}/delete', 'SofaController@delete');
         Route::group(['prefix' => '{id}/items'], function () {
             Route::get('/', 'SofaController@items');
