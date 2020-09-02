@@ -28,8 +28,8 @@ class D1 extends Design
         } catch (\Exception $exception) {
             throw new \Exception('参数不正确，无法生成');
         }
-        if ($h * 2 + $w + 28 <= 144) {
-            if (($h + 13 + 1 + $w + 2 + $h + 13) <= 144) {
+        if ($h * 2 + $w + 28 <= 147) {
+            if (($h + 13 + 1 + $w + 2 + $h + 13) <= 147) {
                 // p1
                 return [
                     [$h + 13, 0],
@@ -87,8 +87,8 @@ class D1 extends Design
                 ];
             }
         } else {
-            if ($l + 2 * $h + 28 <= 144) {
-                if (($l + 2 * $h + 30) <= 144) {
+            if ($l + 2 * $h + 28 <= 147) {
+                if (($l + 2 * $h + 30) <= 147) {
                     // p3
                     return [
                         [0, $h + 13],
@@ -142,9 +142,9 @@ class D1 extends Design
                         [0, $h + 13]
                     ];
                 }
-            } elseif ($l+2*$h+28>144) {
-                if ($l+$h+17<=144) {
-                    if ((($l-$d+2)+($c+2))<=144) {
+            } elseif ($l+2*$h+28>147) {
+                if ($l+$h+17<=147) {
+                    if ((($l-$d+2)+($c+2))<=147) {
                         // p5
                         return [
                             [0, 2],
@@ -218,8 +218,8 @@ class D1 extends Design
                             [0, 2]
                         ];
                     }
-                } elseif ($l+$h+17>144 && $l+5<=144) {
-                    if ((($l - $d + 2) + ($c + 2)) <= 144 && $w + 2 <= 144) {
+                } elseif ($l+$h+17>147 && $l+5<=147) {
+                    if ((($l - $d + 2) + ($c + 2)) <= 147 && $w + 2 <= 147) {
                         // p7
                         return [
                             [0, 2],
@@ -265,7 +265,7 @@ class D1 extends Design
                             [0, $l + 4],
                             [0, 2]
                         ];
-                    } elseif ((($l-$d+2)+($c+2))<=144 && $w+2>144) {
+                    } elseif ((($l-$d+2)+($c+2))<=147 && $w+2>147) {
                         // p8
                         return [
                             [0, 2],
@@ -313,7 +313,7 @@ class D1 extends Design
                             [0, $l + 4],
                             [0, 2]
                         ];
-                    } elseif ((($l-$d+2)+($c+2))>144 && $w+2<=144) {
+                    } elseif ((($l-$d+2)+($c+2))>147 && $w+2<=147) {
                         // p9
                         return [
                             [0, 2],
@@ -360,7 +360,7 @@ class D1 extends Design
                             [0, $l + 4],
                             [0, 2]
                         ];
-                    } elseif ((($l-$d+2)+($c+2))>144 && $w+2>144) {
+                    } elseif ((($l-$d+2)+($c+2))>147 && $w+2>147) {
                         // p10
                         return [
                             [0, 2],
@@ -407,7 +407,7 @@ class D1 extends Design
                             [0, 2]
                         ];
                     }
-                } elseif ($l+$h+26+2>144 && $l+2>144) {
+                } elseif ($l+$h+26+2>147 && $l+2>147) {
 //                    throw new \Exception('你提供的尺寸暂时无法定做！');
                 }
             }

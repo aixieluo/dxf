@@ -23,10 +23,10 @@ class D6 extends Design
         } catch (\Exception $exception) {
             throw new \Exception('参数不正确，无法生成');
         }
-        if ((2 * $l + 6) <= 144) {
+        if ((2 * $l + 6) <= 147) {
             return $this->p1($w, $h, $l);
         } else {
-            if (($w + 4) <= 144) {
+            if (($w + 4) <= 147) {
                 return $this->p2($w, $h, $l);
             } else {
                 throw new \Exception('你提供的尺寸暂时无法定做！');

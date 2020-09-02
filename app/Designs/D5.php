@@ -24,17 +24,17 @@ class D5 extends Design
         } catch (\Exception $exception) {
             throw new \Exception('参数不正确，无法生成');
         }
-        if ((($l + 2 * $b + 28) > ($w + $a + $b + 28)) && (144 >= ($l + 2 * $b + 28))) {
+        if ((($l + 2 * $b + 28) > ($w + $a + $b + 28)) && (147 >= ($l + 2 * $b + 28))) {
             return $this->p1($w, $l, $a, $b);
-        } elseif ((($w + $a + $b + 28) > ($l + 2 * $b + 28)) && (144 >= ($w + $a + $b + 28))) {
+        } elseif ((($w + $a + $b + 28) > ($l + 2 * $b + 28)) && (147 >= ($w + $a + $b + 28))) {
             return $this->p2($w, $l, $a, $b);
-        } elseif ((($l + 2 * $b + 28) > 144) && (144 >= ($w + $a + $b + 28))) {
+        } elseif ((($l + 2 * $b + 28) > 147) && (147 >= ($w + $a + $b + 28))) {
             return $this->p2($w, $l, $a, $b);
-        } elseif ((($w + $a + $b + 28) > 144) && (($l + 2 * $b + 28))) {
+        } elseif ((($w + $a + $b + 28) > 147) && (($l + 2 * $b + 28))) {
             return $this->p1($w, $l, $a, $b);
-        } elseif ((($w + $a + $b + 28) > ($l + 2 * $b + 28)) && ($l + 2 * $b + 28) > 144) {
-            if (($w + $a + 17) <= 144) {
-                if (($l + 2) <= 144) {
+        } elseif ((($w + $a + $b + 28) > ($l + 2 * $b + 28)) && ($l + 2 * $b + 28) > 147) {
+            if (($w + $a + 17) <= 147) {
+                if (($l + 2) <= 147) {
                     return $this->p3($w, $l, $a, $b);
                 } else {
                     return $this->p4($w, $l, $a, $b);
@@ -42,9 +42,9 @@ class D5 extends Design
             } else {
                 throw new \Exception('该尺寸请咨询产品主管！');
             }
-        } elseif ((($l + 2 * $b + 28) > ($w + $a + $b + 28)) && (($w + $a + $b + 28) > 144)) {
-            if (($w + $a + 17) <= 144) {
-                if (($l + 2) <= 144) {
+        } elseif ((($l + 2 * $b + 28) > ($w + $a + $b + 28)) && (($w + $a + $b + 28) > 147)) {
+            if (($w + $a + 17) <= 147) {
+                if (($l + 2) <= 147) {
                     return $this->p3($w, $l, $a, $b);
                 } else {
                     return $this->p4($w, $l, $a, $b);

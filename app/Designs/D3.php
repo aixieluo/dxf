@@ -23,12 +23,12 @@ class D3 extends Design
         } catch (\Exception $exception) {
             throw new \Exception('参数不正确，无法生成');
         }
-        if (($w + 2) > 144 and ($l + 2) <= 144) {
+        if (($w + 2) > 147 and ($l + 2) <= 147) {
             // 1
-        } elseif (($w + 2) <= 144 and ($l + 2) > 144) {
+        } elseif (($w + 2) <= 147 and ($l + 2) > 147) {
             list($w, $l) = [$l, $w];
             // 1
-        } elseif (($w + 2) <= 144 and ($l + 2) <= 144) {
+        } elseif (($w + 2) <= 147 and ($l + 2) <= 147) {
             if ($w > $l) {
                 list($w, $l) = [$l, $w];
             }
