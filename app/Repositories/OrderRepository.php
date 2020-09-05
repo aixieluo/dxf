@@ -141,7 +141,7 @@ class OrderRepository extends Repository
             $m = new $model($lengths);
             for ($i = 0; $i < $od->count; $i++) {
                 $p = $m->make($x);
-                $x += $od->width;
+                $x += $m->offset();
                 $d->addEntity($p);
             }
         });

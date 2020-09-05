@@ -37,6 +37,16 @@ abstract class Design
         return $p;
     }
 
+    public function offset()
+    {
+        $points = collect($this->getPoints());
+        return $points->max(function ($p) {
+            return head($p);
+        }) - $points->min(function ($p) {
+            return head($p);
+        });
+    }
+
     abstract protected function getPoints();
 
     public function move($points, $x)
