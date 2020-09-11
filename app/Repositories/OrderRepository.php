@@ -87,7 +87,7 @@ class OrderRepository extends Repository
 
     public function freshTotal(Order $order)
     {
-        $count = $order->orderDesigns()->count('count');
+        $count = $order->orderDesigns()->sum('count');
         $total = $order->sofaItem->price * $order->orderDesigns->sum(function (OrderDesign $od) {
                 return $od->width * $od->count;
             }) / 100;
