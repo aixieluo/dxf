@@ -83,7 +83,7 @@
             <div class="columns">
                 <div class="column"> </div>
                 <div class="column">
-                    <div class="subtitle is-5">{{ "合计数量：{$order->orderDesigns->count()}个" }}</div>
+                    <div class="subtitle is-5">{{ "合计数量：{$order->orderDesigns->sum('count')}个" }}</div>
                 </div>
             </div>
             <div class="columns">
