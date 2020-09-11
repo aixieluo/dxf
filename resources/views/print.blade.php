@@ -97,6 +97,6 @@
 </section>
 </body>
 <script type="application/javascript">
-    // window.print()
+    window.print()
 </script>
 </html>
