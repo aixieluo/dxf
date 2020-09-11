@@ -12,12 +12,17 @@
 */
 
 use App\Models\Order;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 Route::get('/', function () {
     return view('index');
 });
 
 Route::get('order/{id}/print', function ($id) {
-    $order = Order::find($id);
+    $order = Order::with([
+        'orderDesigns' => function (HasMany $builder) {
+            $builder->orderBy('design_id');
+        }
+    ])->find($id);
     return view('print', compact('order'));
 });

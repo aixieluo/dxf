@@ -35,6 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
  * @property-read int|null $orders_count
+ * @property-read mixed $del
+ * @property-read mixed $url
  */
 class SofaCoverItem extends Model
 {

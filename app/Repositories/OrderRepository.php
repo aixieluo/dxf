@@ -193,4 +193,11 @@ class OrderRepository extends Repository
         $order->unsetRelation('orderDesigns');
         return $order;
     }
+
+    public function accessoriesTotal(Order $order)
+    {
+        return $order->orderDesigns->groupBy('accessories')->map->sum('accessories_count')->map(function ($item, $key) {
+            return "{$key} {$item}";
+        })->implode('；');
+    }
 }

@@ -48,7 +48,7 @@ class DesignSeeder extends Seeder
                 'img'               => '/template/坐垫 靠背.jpg',
                 'types'             => ['l', 'w', 'h'],
                 'model'             => D4::class,
-                'accessories'       => '绳子*6米',
+                'accessories'       => '绳子*4米',
                 'accessories_count' => 1
             ],
             [
@@ -56,7 +56,7 @@ class DesignSeeder extends Seeder
                 'img'               => '/template/靠垫.jpg',
                 'types'             => ['l', 'w', 'a', 'b'],
                 'model'             => D5::class,
-                'accessories'       => '绳子*6米',
+                'accessories'       => '绳子*4米',
                 'accessories_count' => 1
             ],
             [

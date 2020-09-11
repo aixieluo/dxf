@@ -46,6 +46,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\User $user
  * @property string|null $confirmed_at 导出时间
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Order whereConfirmedAt($value)
+ * @property-read mixed $print
  */
 class Order extends Model
 {

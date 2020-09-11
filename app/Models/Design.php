@@ -29,6 +29,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Design whereTypes($value)
  * @property string $model 实例模型
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Design whereModel($value)
+ * @property string|null $accessories 辅料名称
+ * @property int|null $accessories_count 辅料个数
+ * @property-read mixed $url
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Design whereAccessories($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Design whereAccessoriesCount($value)
  */
 class Design extends Model
 {
@@ -36,6 +41,12 @@ class Design extends Model
         'name',
         'img',
         'types',
+        // 长度最大值大于150时候改成6米绳子的辅料
+        'accessories',
+        'accessories_count',
+    ];
+
+    protected $hidden = [
         'accessories',
         'accessories_count',
     ];

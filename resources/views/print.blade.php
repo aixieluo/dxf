@@ -1,3 +1,4 @@
+@inject('op', 'App\Repositories\OrderRepository')
 <!doctype html>
 <html lang="en">
 <head>
@@ -58,26 +59,31 @@
                     <div class="title is-5">客户地址：</div>
                     <div class="title is-6">{{ $order->recipient_information }}</div>
                 </div>
+                <div class="column is-flex">
+                    <div class="title is-5">辅料总数：</div>
+                    <div class="title is-6">{{ $op->accessoriesTotal($order) }}</div>
+                </div>
             </div>
         </div>
         <div class="section">
-            @foreach($order->designs as $design)
+            @foreach($order->orderDesigns as $od)
                 <div class="columns" style="border-bottom: 1px solid #ccc">
                     <div class="column">
                         <figure class="image is-128x128">
-                            <img src="{{ $design->url }}">
+                            <img src="{{ $od->design->url }}">
                         </figure>
                     </div>
                     <div class="column">
-                        <div class="title is-4">{{ $design->name }}</div>
-                        <div class="subtitle is-5">{{ "数量：{$design->pivot->count}个" }}</div>
+                        <div class="title is-4">{{ $od->design->name }}</div>
+                        <div class="subtitle is-5">{{ "数量：{$od->count}个" }}</div>
+                        <div class="subtitle is-5">{{ $od->lengths_text }}</div>
                     </div>
                 </div>
             @endforeach
             <div class="columns">
                 <div class="column"> </div>
                 <div class="column">
-                    <div class="subtitle is-5">{{ "合计数量：{$design->pivot->count}个" }}</div>
+                    <div class="subtitle is-5">{{ "合计数量：{$order->orderDesigns->count()}个" }}</div>
                 </div>
             </div>
             <div class="columns">
@@ -91,6 +97,6 @@
 </section>
 </body>
 <script type="application/javascript">
-    window.print()
+    // window.print()
 </script>
 </html>

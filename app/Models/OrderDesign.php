@@ -30,6 +30,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read mixed $width
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\OrderDesign whereWidth($value)
  * @property-read \App\Models\Design $design
+ * @property-read mixed $real_accessories
+ * @property-read mixed $accessories
+ * @property-read mixed $accessories_count
  */
 class OrderDesign extends Model
 {
@@ -40,9 +43,37 @@ class OrderDesign extends Model
         'count'
     ];
 
+    protected $appends = [
+        'accessories',
+        'accessories_count',
+    ];
+
     protected $casts = [
         'lengths' => 'array'
     ];
+
+    public function getAccessoriesAttribute()
+    {
+        /** @var \App\Designs\Design $m */
+        $m = new $this->design->model($this->lengths);
+        if ($m->offset() >= 150) {
+            return '绳子*6米';
+        } else {
+            return $this->design->accessories;
+        }
+    }
+
+    public function getAccessoriesCountAttribute()
+    {
+        return $this->design->accessories_count;
+    }
+
+    public function getLengthsTextAttribute()
+    {
+        return collect($this->lengths)->map(function ($item, $key) {
+            return "{$key}: {$item}";
+        })->implode(' ');
+    }
 
     public function design()
     {

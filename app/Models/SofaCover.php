@@ -26,6 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SofaCover whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SofaCover whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $order 序列
+ * @property-read mixed $del
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SofaCover whereOrder($value)
  */
 class SofaCover extends Model
 {
