@@ -196,7 +196,9 @@ class OrderRepository extends Repository
 
     public function accessoriesTotal(Order $order)
     {
-        return $order->orderDesigns->groupBy('accessories')->map->sum('accessories_count')->map(function ($item, $key) {
+        return $order->orderDesigns->groupBy('accessories')->map->sum(function (OrderDesign $item) {
+            return $item->count * $item->accessories_count;
+        })->map(function ($item, $key) {
             return "{$key} {$item}";
         })->implode('；');
     }

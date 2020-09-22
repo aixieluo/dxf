@@ -23,6 +23,6 @@ Route::get('order/{id}/print', function ($id) {
         'orderDesigns' => function (HasMany $builder) {
             $builder->orderBy('design_id');
         }
-    ])->find($id);
+    ])->findOrFail($id);
     return view('print', compact('order'));
 });
