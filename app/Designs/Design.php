@@ -32,6 +32,10 @@ abstract class Design
         $points = $this->move($points, $x);
         $p = new Polyline();
         foreach ($points as $point) {
+            // 输进来的单位是cm，实际图是单位是mm，所以要乘10倍
+            $point = array_map(function ($item) {
+                return $item * 10;
+            }, $point);
             $p->addPoint($point);
         }
         return $p;

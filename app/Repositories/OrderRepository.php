@@ -140,10 +140,10 @@ class OrderRepository extends Repository
             /** @var \App\Designs\Design $m */
             $m = new $model($lengths);
             for ($i = 0; $i < $od->count; $i++) {
-                $x += 2;
                 $p = $m->make($x);
                 $x += $m->offset();
                 $d->addEntity($p);
+                $x += .2;
             }
         });
         $path = $this->getDir($order);
