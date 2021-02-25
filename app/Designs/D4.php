@@ -23,56 +23,56 @@ class D4 extends Design
         } catch (\Exception $exception) {
             throw new \Exception('参数不正确，无法生成');
         }
-        if (($w + 2 * $h + 28) <= 147 && ($l + 2 * $h + 28) <= 147) {
+        if (($w + 2 * $h + 28) <= 144 && ($l + 2 * $h + 28) <= 144) {
             if ($w > $l) {
                 list($w, $l) = [$l, $w];
             }
             return $this->p1($w, $h, $l);
-        } elseif (($w + 2 * $h + 28) <= 147 && ($l + 2 * $h + 28) > 147) {
+        } elseif (($w + 2 * $h + 28) <= 144 && ($l + 2 * $h + 28) > 144) {
             list($w, $l) = [$l, $w];
             return $this->p1($w, $h, $l);
-        } elseif (($w + 2 * $h + 28) > 147 && ($l + 2 * $h + 28) <= 147) {
+        } elseif (($w + 2 * $h + 28) > 144 && ($l + 2 * $h + 28) <= 144) {
             return $this->p1($w, $h, $l);
-        } elseif (($w + 2 * $h + 28) > 147 && ($l + 2 * $h + 28) > 147) {
-            if (($w + $h + 16) > 147 && ($l + $h + 16) <= 147) {
-                if (($w + 2) > 147) {
+        } elseif (($w + 2 * $h + 28) > 144 && ($l + 2 * $h + 28) > 144) {
+            if (($w + $h + 16) > 144 && ($l + $h + 16) <= 144) {
+                if (($w + 2) > 144) {
                     return $this->p4($w, $h, $l);
                 }else {
                     return $this->p3($w, $h, $l);
                 }
-            } elseif (($w + $h + 16) <= 147 and ($l + $h + 16) > 147) {
+            } elseif (($w + $h + 16) <= 144 and ($l + $h + 16) > 144) {
                 list($w, $l) = [$l, $w];
-                if ($l +3 > 147) {
+                if ($l +3 > 144) {
                     return $this->p4($w, $h, $l);
                 } else {
                     return $this->p3($w, $h, $l);
                 }
-            } elseif (($w + $h + 16) <= 147 && ($l + $h + 16) <= 147) {
+            } elseif (($w + $h + 16) <= 144 && ($l + $h + 16) <= 144) {
                 if ($w > $l) {
                     list($w, $l) = [$l, $w];
                 }
                 return $this->p3($w, $h, $l);
-            } elseif (($w + 2) + ($h + 13) > 147 && ($l + 2) + ($h + 13) > 147) {
-                if (($l < $w) && (($w + 3) <= 147)) {
+            } elseif (($w + 2) + ($h + 13) > 144 && ($l + 2) + ($h + 13) > 144) {
+                if (($l < $w) && (($w + 3) <= 144)) {
                     list($w, $l) = [$l, $w];
-                    if ((2 * ($l + 2)) <= 147) {
+                    if ((2 * ($l + 2)) <= 144) {
                         return $this->p7($w, $h, $l);
                     } else {
                         return $this->p5($w, $h, $l);
                     }
-                } elseif (($w +3 > 147) && ($l + 3 <= 147)) {
+                } elseif (($w +3 > 144) && ($l + 3 <= 144)) {
                     return $this->p6($w, $h, $l);
-                } elseif (($w >= $l) && $l + 3 > 147) {
+                } elseif (($w >= $l) && $l + 3 > 144) {
                     throw new \Exception('你提供的尺寸暂时无法定做！');
-                } elseif (($l >= $w) && $w + 3 > 147) {
+                } elseif (($l >= $w) && $w + 3 > 144) {
                     throw new \Exception('你提供的尺寸暂时无法定做！');
-                } elseif (($w < $l) && $l + 3 <= 147) {
-                    if (2 * ($w + 2) <= 147) {
+                } elseif (($w < $l) && $l + 3 <= 144) {
+                    if (2 * ($w + 2) <= 144) {
                         return $this->p7($w, $h, $l);
                     } else {
                         return $this->p5($w, $h, $l);
                     }
-                } elseif ($l + 3 > 147 && $w + 3 <= 147) {
+                } elseif ($l + 3 > 144 && $w + 3 <= 144) {
                     list($w, $l) = [$l, $w];
                     return $this->p6($w, $h, $l);
                 } else {

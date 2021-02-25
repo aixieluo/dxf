@@ -17,3 +17,4 @@ _ide_helper.php
 public/static
 public/dist
 storage/dxf
+.DS_Store
