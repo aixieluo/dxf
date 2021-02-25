@@ -41,10 +41,11 @@ class D4 extends Design
                     return $this->p3($w, $h, $l);
                 }
             } elseif (($w + $h + 16) <= 144 and ($l + $h + 16) > 144) {
-                list($w, $l) = [$l, $w];
                 if ($l +3 > 144) {
+                    list($w, $l) = [$l, $w];
                     return $this->p4($w, $h, $l);
                 } else {
+                    list($w, $l) = [$l, $w];
                     return $this->p3($w, $h, $l);
                 }
             } elseif (($w + $h + 16) <= 144 && ($l + $h + 16) <= 144) {
