@@ -18,3 +18,7 @@ public/static
 public/dist
 storage/dxf
 .DS_Store
+.htaccess
+.user.ini
+404.html
+index.html
