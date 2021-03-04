@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         //
         Gate::define('order.curd', function (User $user, Order $order) {
             return $user->id === $order->user_id ||
-                   in_array($user->position->name, Position::$p2);
+                   array_key_exists($user->position->name, Position::$p2);
         });
 
         Gate::define('admin', function (User $user) {
