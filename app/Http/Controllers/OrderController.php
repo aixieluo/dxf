@@ -71,7 +71,7 @@ class OrderController extends Controller
     public function update($id, CreateRequest $request)
     {
         $order = $this->order->id($id);
-        if (\Gate::allows('order.curd', $order)) {
+        if (\Gate::denies('order.curd', $order)) {
             throw new \Exception('权限不足', 403);
         }
         $this->order->update($order, $request->all());
@@ -81,7 +81,7 @@ class OrderController extends Controller
     public function delete($id)
     {
         $order = $this->order->id($id);
-        if (\Gate::allows('order.curd', $order)) {
+        if (\Gate::denies('order.curd', $order)) {
             throw new \Exception('权限不足', 403);
         }
         $this->order->delete($order);
